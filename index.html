@@ -11,7 +11,7 @@
 
     <style>
         .title {
-            font-size: 60px;
+            font-size: 50px;
             font-weight: 700;
         }
 
@@ -35,6 +35,12 @@
 
         .btn {
             border-radius: 0;
+        }
+
+        @media screen and (min-width: 768px) {
+            .title {
+                font-size: 60px;
+            }
         }
     </style>
 </head>
@@ -61,26 +67,32 @@
                         </div>
 
                         <button class="btn btn-block btn-gray my-4" type="button" data-toggle="collapse"
-                            data-target="#colors-container">
+                            data-target="#colors-container" data-collapse-button>
                             <i class="fa fa-fw fa-palette fa-sm mr-1"></i> Colours
+                            <i class="fa fa-fw fa-chevron-down fa-sm" data-chevron-icon></i>
                         </button>
 
                         <div id="colors-container" class="collapse hide">
-                            <div>
-                                <label for="foreground-color" class="form-label">Foreground colour</label>
-                                <input id="foreground-color" type="color" class="form-control form-control-color p-0"
-                                    value="#000000" title="Choose a color">
-                            </div>
-                            <div class="mt-4">
-                                <label for="background-color" class="form-label">Background colour</label>
-                                <input id="background-color" type="color" class="form-control form-control-color p-0"
-                                    value="#ffffff" title="Choose a color">
+                            <div class="row">
+                                <div class="col-sm-6 mb-4">
+                                    <label for="foreground-color" class="form-label">Foreground colour</label>
+                                    <input id="foreground-color" type="color"
+                                        class="form-control form-control-color p-0" value="#000000"
+                                        title="Choose a color">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="background-color" class="form-label">Background colour</label>
+                                    <input id="background-color" type="color"
+                                        class="form-control form-control-color p-0" value="#ffffff"
+                                        title="Choose a color">
+                                </div>
                             </div>
                         </div>
 
                         <button class="btn btn-block btn-gray my-4" type="button" data-toggle="collapse"
-                            data-target="#options-container">
+                            data-target="#options-container" data-collapse-button="">
                             <i class="fa fa-fw fa-wrench fa-sm mr-1"></i> Options
+                            <i class="fa fa-fw fa-chevron-down fa-sm" data-chevron-icon></i>
                         </button>
 
                         <div id="options-container" class="collapse hide">
@@ -176,9 +188,30 @@
             }
         }
 
-        $("#create-button").on("click", generateCode);
-        // $("#download-png").on("click", () => download("png"));
-        $("#download-svg").on("click", () => download("svg"));
+        $(document).ready(function () {
+            $("#create-button").on("click", generateCode);
+            // $("#download-png").on("click", () => download("png"));
+            $("#download-svg").on("click", () => download("svg"));
+
+            $("[data-collapse-button]").each(function () {
+                const target = $($(this).data("target"));
+                const chevronIcon = $(this).find("[data-chevron-icon]");
+
+                updateChevronIcon();
+
+                target.on("shown.bs.collapse hidden.bs.collapse", function () {
+                    updateChevronIcon();
+                });
+
+                function updateChevronIcon() {
+                    if (target.hasClass("show")) {
+                        chevronIcon.removeClass("fa-chevron-down").addClass("fa-chevron-up");
+                    } else {
+                        chevronIcon.removeClass("fa-chevron-up").addClass("fa-chevron-down");
+                    }
+                }
+            });
+        });
     </script>
 </body>
 
