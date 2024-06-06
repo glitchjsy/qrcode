@@ -37,6 +37,11 @@
             border-radius: 0;
         }
 
+        #qrcode-placeholder {
+            opacity: 0.5;
+            width: 100%;
+        }
+
         @media screen and (min-width: 768px) {
             .title {
                 font-size: 60px;
@@ -115,6 +120,7 @@
             <div class="col-12 col-lg-5">
                 <div class="card mb-4">
                     <div class="card-body">
+                        <img id="qrcode-placeholder" src="/placeholder.png">
                         <div id="qrcode"></div>
                     </div>
                 </div>
@@ -128,7 +134,7 @@
         </div>
 
         <footer class="d-flex justify-content-between mt-5">
-            <p>Created by <a href="https://github.com/lukeeey">Luke</a>.</p>
+            <p>Created by <a href="https://github.com/lukeeey">Luke</a></p>
             <p><a href="https://github.com/glitchjsy/qrcode">Source code</a></p>
         </footer>
     </div>
@@ -154,6 +160,7 @@
                 $("#no-text").removeClass("d-none");
                 return;
             }
+            $("#qrcode-placeholder").addClass("d-none");
             $("#no-text").addClass("d-none");
 
             const qrcode = new QRCode({
@@ -178,7 +185,7 @@
 
         function download(type) {
             if (type === "svg") {
-                const base64doc = btoa(unescape(encodeURIComponent($("#qrcode > svg").html())));
+                const base64doc = btoa(unescape(encodeURIComponent($("#qrcode").html())));
                 const a = document.createElement("a");
                 const e = new MouseEvent("click");
 
