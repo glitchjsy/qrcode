@@ -151,7 +151,7 @@
                 <button id="download-button" type="button" class="btn btn-block btn-black dropdown-toggle"
                     data-toggle="dropdown" disabled>Download</button>
                 <div class="dropdown-menu">
-                    <div id="download-png" class="dropdown-item">Download as PNG (coming soon)</div>
+                    <div id="download-png" class="dropdown-item">Download as PNG</div>
                     <div id="download-svg" class="dropdown-item">Download as SVG</div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
 
             const text = $("#text").val();
 
-            // Don't allow creating a QR code with no text
+            // Don"t allow creating a QR code with no text
             if (text === "") {
                 $("#no-text").removeClass("d-none");
                 return;
@@ -214,15 +214,38 @@
         }
 
         function download(type) {
-            if (type === "svg") {
-                // Convert to base64 and download
-                const base64doc = btoa(unescape(encodeURIComponent($("#qrcode").html())));
-                const a = document.createElement("a");
-                const e = new MouseEvent("click");
+            const base64doc = btoa(unescape(encodeURIComponent($("#qrcode").html())));
+            const a = document.createElement("a");
+            const e = new MouseEvent("click");
 
+            if (type === "svg") {
                 a.download = "download.svg";
-                a.href = "data:text/html;base64," + base64doc;
+                a.href = "data:image/svg+xml;charset=utf-8;base64," + base64doc;
                 a.dispatchEvent(e);
+            }
+            if (type === "png") {
+                const image = new Image()
+
+                image.addEventListener("load", () => {
+                    const qrcode = document.getElementById("qrcode").getBoundingClientRect();
+                    const width = qrcode.width;
+                    const height = qrcode.height;
+
+                    const canvas = document.createElement("canvas");
+
+                    canvas.setAttribute("width", width);
+                    canvas.setAttribute("height", height);
+
+                    const context = canvas.getContext("2d");
+                    context.drawImage(image, 0, 0, width, height);
+
+                    const dataUrl = canvas.toDataURL("image/png");
+
+                    a.download = "download.png";
+                    a.href = dataUrl;
+                    a.dispatchEvent(e);
+                });
+                image.src = "data:image/svg+xml;charset=utf-8;base64," + base64doc;
             }
         }
 
@@ -247,7 +270,7 @@
             });
 
             $("#create-button").on("click", generateCode);
-            // $("#download-png").on("click", () => download("png"));
+            $("#download-png").on("click", () => download("png"));
             $("#download-svg").on("click", () => download("svg"));
 
             // Open the configuration sections
