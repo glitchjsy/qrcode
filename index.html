@@ -13,6 +13,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+    <link rel="stylesheet" href="style.css">
+
     <!-- https://itsjavi.com/bootstrap-colorpicker/tutorial-p02_Advanced_Examples.html -->
     <style>
         .colorpicker.colorpicker-2x {
@@ -50,64 +52,24 @@
             margin: -5px 0 0 -5px;
         }
     </style>
-
-    <style>
-        .title {
-            font-size: 50px;
-            font-weight: 700;
-        }
-
-        .btn-black,
-        .btn-black:hover {
-            color: white;
-            background-color: black;
-            border-color: black;
-        }
-
-        .btn-gray {
-            color: black;
-            background-color: #e5e7eb;
-            border-color: #e5e7eb;
-        }
-
-        .btn-gray:hover {
-            background-color: #cfd3da;
-            border-color: #cfd3da;
-        }
-
-        .btn {
-            border-radius: 0;
-        }
-
-        .color-picker {
-            color: transparent;
-            outline: none;
-            border: none;
-            width: 100%;
-        }
-
-        .color-picker-wrapper {
-            border: 1px solid #e6e6e6;
-            padding: 5px;
-        }
-
-        #qrcode-placeholder {
-            opacity: 0.5;
-            width: 100%;
-        }
-
-        @media screen and (min-width: 768px) {
-            .title {
-                font-size: 60px;
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <div class="glitch-nav">
+        <div class="glitch-nav-title">
+            <p class="glitch-nav-glitch">Glitch.je</p>
+        </div>
+
+        <ul class="glitch-nav-items">
+            <li class="glitch-nav-item"><a href="https://data.glitch.je">Open Data</a></li>
+            <li class="glitch-nav-item glitch-nav-item-active"><a href="https://qrcode.glitch.je">QR Code</a></li>
+            <li class="glitch-nav-item"><a href="https://cls.glitch.je">CLS Queues</a></li>
+        </ul>
+    </div>
     <div class="container pt-5">
         <div class="text-center mb-5">
             <h1 class="title">QR Code Generator</h1>
+            <p class="summary">A simple QR code generator in your browser!</p>
         </div>
         <div class="row">
             <div class="col-12 col-lg-7">
@@ -125,7 +87,7 @@
                             <textarea id="text" name="text" class="form-control" maxlength="2048"></textarea>
                         </div>
 
-                        <button class="btn btn-block btn-gray my-4" type="button" data-toggle="collapse"
+                        <button class="btn btn-block btn-gray my-4 rounded-lg" type="button" data-toggle="collapse"
                             data-target="#colors-container" data-collapse-button>
                             <i class="fa fa-fw fa-palette fa-sm mr-1"></i> Colours
                             <i class="fa fa-fw fa-chevron-down fa-sm" data-chevron-icon></i>
@@ -156,7 +118,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-block btn-gray my-4" type="button" data-toggle="collapse"
+                        <button class="btn btn-block btn-gray my-4 rounded-lg" type="button" data-toggle="collapse"
                             data-target="#options-container" data-collapse-button>
                             <i class="fa fa-fw fa-wrench fa-sm mr-1"></i> Options
                             <i class="fa fa-fw fa-chevron-down fa-sm" data-chevron-icon></i>
@@ -175,7 +137,7 @@
                             </div>
                         </div>
 
-                        <button id="create-button" type="button" class="btn btn-block btn-black">Create</button>
+                        <button id="create-button" type="button" class="btn btn-block btn-black rounded-lg">Create</button>
                     </div>
                 </div>
             </div>
@@ -186,7 +148,7 @@
                         <div id="qrcode"></div>
                     </div>
                 </div>
-                <button id="download-button" type="button" class="btn btn-block btn-black dropdown-toggle"
+                <button id="download-button" type="button" class="btn btn-block btn-black dropdown-toggle rounded-lg"
                     data-toggle="dropdown" disabled>Download</button>
                 <div class="dropdown-menu">
                     <div id="download-png" class="dropdown-item">Download as PNG</div>
@@ -195,7 +157,7 @@
             </div>
         </div>
 
-        <footer class="d-flex justify-content-between mt-5">
+        <footer class="d-flex justify-content-between mt-5 mb-5">
             <p>Created by <a href="https://github.com/lukeeey">Luke</a></p>
             <p><a href="https://github.com/glitchjsy/qrcode">Source code</a></p>
         </footer>
