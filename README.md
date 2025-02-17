@@ -1,4 +1,5 @@
 # [QRCode Generator](https://qrcode.glitch.je)
+[![Hits](https://hitcount.dev/p/glitchjsy/qrcode.svg)](https://hitcount.dev/p/glitchjsy/qrcode)  
 A free, easy to use QR code generator.
 
 ## Why?
